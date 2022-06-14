@@ -15,3 +15,5 @@ export type Flat = FirebaseId & {
   photoUrl: string;
   publishedAt: Timestamp;
 };
+
+export type TLink = { url: string };
