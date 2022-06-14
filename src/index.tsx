@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { FirebaseAppProvider } from 'reactfire';
 
 import reportWebVitals from './reportWebVitals';
 import App from './components/Unknown/App';
+import firebaseApp from './common/firebaseApp';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FirebaseAppProvider firebaseApp={firebaseApp}>
+      <App />
+    </FirebaseAppProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

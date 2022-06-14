@@ -16,4 +16,4 @@ export type Flat = FirebaseId & {
   publishedAt: Timestamp;
 };
 
-export type TLink = { url: string };
+export type TLink = { url: string; title?: string };

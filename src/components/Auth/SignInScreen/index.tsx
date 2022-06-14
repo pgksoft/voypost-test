@@ -4,14 +4,13 @@ import { useHistory } from 'react-router-dom';
 import {
   Container,
   Grid,
-  Theme,
   Typography,
   Button,
   Box,
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import { createStyles, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Field, Formik, FormikProps } from 'formik';
 import { UIContext } from '../../Unknown/UIContext';
@@ -21,53 +20,55 @@ import { getInitialValues, IValues, KeyValues } from './util/values';
 import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-components/Formik-app-text-field';
 import TITLES_SIGN_IN from './const/titles';
 import validationSchema from './util/validation-schema';
-import { home } from '../../Unknown/Root/const/links';
+import login, { home } from '../../Unknown/Root/const/links';
+import RouteContext from '../../Unknown/Route-context';
 
-export const useStyles = makeStyles((theme: Theme) => {
-  return createStyles({
-    root: {
-      display: 'flex',
-      height: '100vh',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    fullHeight: { height: '100%' },
-    leftSide: {
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      backgroundSize: 'contain',
-      backgroundImage: `url(${heroImage})`,
-    },
-    rightSide: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: '50% 20%',
-      backgroundSize: '20%',
-      backgroundImage: `url(${voypostLogo})`,
-    },
-    signin: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      width: '70%',
-      height: '50%',
-    },
-  });
+export const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    height: '100vh',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fullHeight: { height: '100%' },
+  leftSide: {
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'contain',
+    backgroundImage: `url(${heroImage})`,
+  },
+  rightSide: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: '50% 20%',
+    backgroundSize: '20%',
+    backgroundImage: `url(${voypostLogo})`,
+  },
+  signin: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '70%',
+    height: '50%',
+  },
 });
 
 const SignInScreen: React.FC = () => {
   const classes = useStyles();
   const { setAlert } = useContext(UIContext);
+  const { setActiveMainLink } = useContext(RouteContext);
   const history = useHistory();
 
   const [values, setValues] = useState<IValues | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isLogging, setIsLogging] = useState(false);
+
+  setActiveMainLink(login);
 
   const onClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -95,7 +96,6 @@ const SignInScreen: React.FC = () => {
           history.push(home.url);
         })
         .catch((error) => {
-          setIsLogging(false);
           const { message } = error;
           setAlert({
             show: true,

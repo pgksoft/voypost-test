@@ -1,24 +1,31 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { FirebaseAppProvider } from 'reactfire';
-import firebaseApp from '../../../common/firebaseApp';
+import { useUser } from 'reactfire';
 import theme from '../../../common/theme';
 import Root from '../Root';
 import { UIContextProvider } from '../UIContext';
+import MainMenu from '../Main-menu';
+import { RouteContextProvider } from '../Route-context';
 
 const App: React.FC = () => {
+  const { data: user } = useUser();
   return (
-    <FirebaseAppProvider firebaseApp={firebaseApp}>
-      <ThemeProvider theme={theme}>
-        <Router basename={process.env.PUBLIC_URL || '/'}>
-          <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <Router basename={process.env.PUBLIC_URL || '/'}>
+        <CssBaseline />
+        <RouteContextProvider>
           <UIContextProvider>
-            <Root />
+            {!user && <Root />}
+            {user && (
+              <MainMenu>
+                <Root />
+              </MainMenu>
+            )}
           </UIContextProvider>
-        </Router>
-      </ThemeProvider>
-    </FirebaseAppProvider>
+        </RouteContextProvider>
+      </Router>
+    </ThemeProvider>
   );
 };
 
