@@ -13,6 +13,7 @@ import UserAuthMenu from '../User-auth-menu';
 import RouteContext from '../Route-context';
 
 export const useStyles = makeStyles({
+  toolBar: { display: 'flex', alignItems: 'center' },
   content: {
     width: '100%',
     padding: '0 0.3%',
@@ -30,7 +31,7 @@ const MainMenu: FC = ({ children }) => {
     <Box display="flex" overflow="hidden">
       <CssBaseline />
       <AppBar position="fixed">
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" className={classes.toolBar}>
           <IconButton
             size="small"
             color="inherit"

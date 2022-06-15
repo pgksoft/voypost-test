@@ -1,9 +1,30 @@
-import React, { FC, useState } from 'react';
-import { IconButton, Menu } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
+import React, { FC, useEffect, useState } from 'react';
+import { useUser } from 'reactfire';
+import { IconButton, Menu, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import Logout from './Log-out';
 
+export const useStyleIconButton = makeStyles({
+  iconButton: {
+    '&.MuiIconButton-root': {
+      boxSizing: 'border-box',
+      color: '#fff',
+      fontWeight: 'bold',
+      backgroundColor: 'rgb(180,180,180)',
+      width: '36px',
+      height: '36px',
+    },
+    '&.MuiIconButton-root:hover': {
+      backgroundColor: 'rgb(150,150,150)',
+    },
+  },
+});
+
 const UserAuthMenu: FC = () => {
+  const classes = useStyleIconButton();
+  const { data: user } = useUser();
+
+  const [userLetters, setUserLetters] = useState('U');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -15,10 +36,20 @@ const UserAuthMenu: FC = () => {
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    if (user && user.displayName) {
+      const names = user.displayName.split(' ');
+      const newUserLetters = `${names[0].charAt(0).toUpperCase()}${
+        names[1] && names[1].charAt(0).toUpperCase()
+      }`;
+      setUserLetters(newUserLetters);
+    }
+  }, [user]);
+
   return (
     <>
-      <IconButton onClick={handleMenu} color="inherit">
-        <SettingsIcon />
+      <IconButton onClick={handleMenu} className={classes.iconButton}>
+        <Typography variant="body1">{userLetters}</Typography>
       </IconButton>
       <Menu
         anchorEl={anchorEl}

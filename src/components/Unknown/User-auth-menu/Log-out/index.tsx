@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UIContext } from '../../UIContext';
 import login from '../../Root/const/links';
+import clearFirestoreCache from '../../../../common/clearFirestoreCache';
 
 type TLogoutProps = {
   handleClose: () => void;
@@ -19,6 +20,7 @@ const Logout: FC<TLogoutProps> = ({ handleClose }) => {
       .auth()
       .signOut()
       .then(() => {
+        clearFirestoreCache();
         history.push(login.url);
       })
       .catch((error) => {
