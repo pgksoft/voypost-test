@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import firebase from 'firebase';
-import { useHistory } from 'react-router-dom';
 import {
   Container,
   Grid,
@@ -10,65 +9,27 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Field, Formik, FormikProps } from 'formik';
 import { UIContext } from '../../Unknown/UIContext';
-import heroImage from '../../../common/images/hero-image.png';
-import voypostLogo from '../../../common/images/voypost-logo.png';
 import { getInitialValues, IValues, KeyValues } from './util/values';
 import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-components/Formik-app-text-field';
-import TITLES_SIGN_IN from './const/titles';
 import validationSchema from './util/validation-schema';
-import login, { home } from '../../Unknown/Root/const/links';
-import RouteContext from '../../Unknown/Route-context';
+import useStyles from './util/styles';
 
-export const useStyles = makeStyles({
-  root: {
-    display: 'flex',
-    height: '100vh',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  fullHeight: { height: '100%' },
-  leftSide: {
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: 'contain',
-    backgroundImage: `url(${heroImage})`,
-  },
-  rightSide: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: '50% 20%',
-    backgroundSize: '20%',
-    backgroundImage: `url(${voypostLogo})`,
-  },
-  signin: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '70%',
-    height: '50%',
-  },
-});
+const TITLES: Record<string, string> = {
+  title: 'Login',
+  emailTitle: 'Email Address',
+  passwordTitle: 'Password',
+  successSignIn: 'You have successfully logged in',
+  errorSignIn: 'Error sign in',
+};
 
 const SignInScreen: React.FC = () => {
   const classes = useStyles();
   const { setAlert } = useContext(UIContext);
-  const { setActiveMainLink } = useContext(RouteContext);
-  const history = useHistory();
 
-  const [values, setValues] = useState<IValues | null>(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [isLogging, setIsLogging] = useState(false);
-
-  setActiveMainLink(login);
 
   const onClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -78,36 +39,28 @@ const SignInScreen: React.FC = () => {
     event.preventDefault();
   };
 
-  useEffect(() => {
-    if (values) {
-      setIsLogging(true);
-      const { email, password } = values;
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(() => {
-          // Signed in
-          setAlert({
-            show: true,
-            severity: 'success',
-            message: TITLES_SIGN_IN.successSignIn,
-          });
-          setIsLogging(false);
-          history.push(home.url);
-        })
-        .catch((error) => {
-          const { message } = error;
-          setAlert({
-            show: true,
-            severity: 'error',
-            message: `${TITLES_SIGN_IN.errorSignIn}${
-              (message && `: ${message}`) || ''
-            }`,
-          });
+  const signInWithEmailAndPassword = (values: IValues) => {
+    const { email, password } = values;
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        // Signed in
+        setAlert({
+          show: true,
+          severity: 'success',
+          message: TITLES.successSignIn,
         });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setAlert, values]);
+      })
+      .catch((error) => {
+        const { message } = error;
+        setAlert({
+          show: true,
+          severity: 'error',
+          message: `${TITLES.errorSignIn}${(message && `: ${message}`) || ''}`,
+        });
+      });
+  };
 
   return (
     <>
@@ -119,14 +72,15 @@ const SignInScreen: React.FC = () => {
               <Formik
                 initialValues={getInitialValues()}
                 validationSchema={validationSchema}
-                onSubmit={(newValues, { setSubmitting }) => {
+                onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
-                    setValues(newValues);
                     setSubmitting(false);
+                    signInWithEmailAndPassword(values);
                   }, 200);
                 }}
               >
                 {(formik: FormikProps<IValues>) => {
+                  const { isSubmitting } = formik;
                   return (
                     <form
                       autoComplete="off"
@@ -134,13 +88,13 @@ const SignInScreen: React.FC = () => {
                       className={classes.signin}
                     >
                       <Typography variant="h5" fontWeight="bold">
-                        {TITLES_SIGN_IN.title}
+                        {TITLES.title}
                       </Typography>
                       <Field
                         component={FormikAppTextField}
                         name={KeyValues.email}
                         type={KeyValues.email}
-                        label={TITLES_SIGN_IN.emailTitle}
+                        label={TITLES.emailTitle}
                         variant="standard"
                         fullWidth
                         autoComplete="off"
@@ -149,7 +103,7 @@ const SignInScreen: React.FC = () => {
                         component={FormikAppTextField}
                         name={KeyValues.password}
                         type={showPassword ? 'text' : KeyValues.password}
-                        label={TITLES_SIGN_IN.passwordTitle}
+                        label={TITLES.passwordTitle}
                         variant="standard"
                         fullWidth
                         autoComplete="off"
@@ -177,9 +131,9 @@ const SignInScreen: React.FC = () => {
                         variant="contained"
                         fullWidth
                         type="submit"
-                        disabled={isLogging}
+                        disabled={isSubmitting}
                       >
-                        {TITLES_SIGN_IN.title}
+                        {TITLES.title}
                       </Button>
                     </form>
                   );

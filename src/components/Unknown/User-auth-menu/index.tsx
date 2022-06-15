@@ -3,6 +3,7 @@ import { useUser } from 'reactfire';
 import { IconButton, Menu, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Logout from './Log-out';
+import getUserLetters from './Log-out/util/get-user-letters';
 
 export const useStyleIconButton = makeStyles({
   iconButton: {
@@ -38,11 +39,7 @@ const UserAuthMenu: FC = () => {
 
   useEffect(() => {
     if (user && user.displayName) {
-      const names = user.displayName.split(' ');
-      const newUserLetters = `${names[0].charAt(0).toUpperCase()}${
-        names[1] && names[1].charAt(0).toUpperCase()
-      }`;
-      setUserLetters(newUserLetters);
+      setUserLetters(getUserLetters(user.displayName));
     }
   }, [user]);
 

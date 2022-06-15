@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { useUser } from 'reactfire';
 import AuthenticatedLayout from '../AuthenticatedLayout';
 import GuestLayout from '../GuestLayout';
@@ -14,20 +14,12 @@ const Root: React.FC = () => {
     // hasEmitted,
     firstValuePromise,
   } = useUser();
-  const history = useHistory();
   const [isUserLoaded, setIsUserLoaded] = useState(false);
   const isLogged = !!user;
 
   useEffect(() => {
     firstValuePromise.then(() => setIsUserLoaded(true));
   }, [firstValuePromise, setIsUserLoaded]);
-
-  useEffect(() => {
-    if (!isLogged) {
-      history.push(login.url);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLogged]);
 
   // doesn't always work, but suddenly works when subscribing to `firstValuePromise`
   // thus we use `isUserLoaded` below
@@ -58,7 +50,7 @@ const Root: React.FC = () => {
     <GuestLayout>
       <Switch>
         <Route exact path={login.url} component={SignInScreen} />
-        <Route path="*" component={NotFoundScreen} />
+        <Route path="*" component={() => <Redirect to={login.url} />} />
       </Switch>
     </GuestLayout>
   );

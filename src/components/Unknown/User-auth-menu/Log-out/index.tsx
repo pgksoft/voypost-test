@@ -1,9 +1,7 @@
 import React, { FC, useContext } from 'react';
 import firebase from 'firebase';
-import { useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { UIContext } from '../../UIContext';
-import login from '../../Root/const/links';
 import clearFirestoreCache from '../../../../common/clearFirestoreCache';
 
 type TLogoutProps = {
@@ -12,7 +10,6 @@ type TLogoutProps = {
 
 const Logout: FC<TLogoutProps> = ({ handleClose }) => {
   const { setAlert } = useContext(UIContext);
-  const history = useHistory();
 
   const handleClick = () => {
     handleClose();
@@ -21,7 +18,6 @@ const Logout: FC<TLogoutProps> = ({ handleClose }) => {
       .signOut()
       .then(() => {
         clearFirestoreCache();
-        history.push(login.url);
       })
       .catch((error) => {
         const { message } = error;

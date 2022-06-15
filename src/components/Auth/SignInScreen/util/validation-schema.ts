@@ -1,15 +1,21 @@
 import { string, object } from 'yup';
-import MIN_PASSWORD_LENGTH from '../const/constraints';
-import TITLES_SIGN_IN from '../const/titles';
 import { KeyValues } from './values';
 
+const MIN_PASSWORD_LENGTH = 6;
+
+const TITLES: Record<string, string> = {
+  stringValidateEmail: 'Invalid email address',
+  stringValidateEmpty: 'Required',
+  stringValidateMin: `Must be ${MIN_PASSWORD_LENGTH} characters or more`,
+};
+
 const emailValidationSchema = string()
-  .email(TITLES_SIGN_IN.stringValidateEmail)
-  .required(TITLES_SIGN_IN.stringValidateEmpty);
+  .email(TITLES.stringValidateEmail)
+  .required(TITLES.stringValidateEmpty);
 
 const passwordValidationSchema = string()
-  .min(MIN_PASSWORD_LENGTH, TITLES_SIGN_IN.stringValidateMin)
-  .required(TITLES_SIGN_IN.stringValidateEmpty);
+  .min(MIN_PASSWORD_LENGTH, TITLES.stringValidateMin)
+  .required(TITLES.stringValidateEmpty);
 
 const validationSchema = object({
   [KeyValues.email]: emailValidationSchema,

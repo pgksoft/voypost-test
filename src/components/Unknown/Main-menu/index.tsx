@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import {
   AppBar,
   Box,
@@ -10,7 +10,6 @@ import {
 import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import UserAuthMenu from '../User-auth-menu';
-import RouteContext from '../Route-context';
 
 export const useStyles = makeStyles({
   toolBar: { display: 'flex', alignItems: 'center' },
@@ -25,7 +24,6 @@ export const useStyles = makeStyles({
 
 const MainMenu: FC = ({ children }) => {
   const classes = useStyles();
-  const { activeMainLink } = useContext(RouteContext);
 
   return (
     <Box display="flex" overflow="hidden">
@@ -42,7 +40,7 @@ const MainMenu: FC = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            {activeMainLink.title}
+            Voypost
           </Typography>
           <UserAuthMenu />
         </Toolbar>
