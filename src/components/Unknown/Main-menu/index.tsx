@@ -10,6 +10,7 @@ import {
 import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import UserAuthMenu from '../User-auth-menu';
+import { home } from '../Root/const/links';
 
 export const useStyles = makeStyles({
   toolBar: { display: 'flex', alignItems: 'center' },
@@ -40,7 +41,7 @@ const MainMenu: FC = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Voypost
+            {home.title}
           </Typography>
           <UserAuthMenu />
         </Toolbar>
