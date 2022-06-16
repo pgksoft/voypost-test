@@ -28,7 +28,12 @@ export const UIContextProvider: React.FC = ({ children }) => {
   return (
     <UIContext.Provider value={{ setAlert }}>
       {children}
-      <Snackbar open={alert.show} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar
+        open={alert.show}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
         <MuiAlert elevation={6} variant="filled" severity={alert.severity}>
           {alert.message}
         </MuiAlert>

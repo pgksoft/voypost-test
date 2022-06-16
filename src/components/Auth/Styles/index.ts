@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
-import heroImage from './hero-image.png';
-import voypostLogo from './voypost-logo.svg';
+import heroImage from '../Images/hero-image.png';
+import voypostLogo from '../Images/voypost-logo.svg';
 
 const useStyles = makeStyles({
   root: {
@@ -20,10 +20,10 @@ const useStyles = makeStyles({
   rightSide: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: '50% 20%',
+    backgroundPosition: '50% 10%',
     backgroundSize: '20%',
     backgroundImage: `url(${voypostLogo})`,
   },
@@ -34,6 +34,18 @@ const useStyles = makeStyles({
     alignItems: 'center',
     width: '70%',
     height: '50%',
+    marginTop: '30%',
+  },
+  signup: {
+    '&.signin': {
+      height: '70%',
+    },
+  },
+  footer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginBottom: '5%',
   },
 });
 

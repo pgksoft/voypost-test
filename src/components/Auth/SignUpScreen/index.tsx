@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import firebase from 'firebase';
 import {
+  Box,
+  Button,
   Container,
   Grid,
-  Typography,
-  Button,
-  Box,
-  InputAdornment,
   IconButton,
+  InputAdornment,
+  Typography,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Field, Formik, FormikProps } from 'formik';
@@ -15,54 +15,36 @@ import { UIContext } from '../../Unknown/UIContext';
 import { getInitialValues, IValues, keyValues } from './util/values';
 import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-components/Formik-app-text-field';
 import validationSchema from './util/validation-schema';
-import useStyles from '../Styles';
 import NavLinkButton from '../../Unknown/Infrastrucuture/Ui/Nav-Link-Button';
 import login, { register } from '../../Unknown/Root/const/links';
+import useStyles from '../Styles';
 
 const TITLES: Record<string, string> = {
-  title: login.title,
+  title: register.title,
   emailTitle: 'Email Address',
+  fullNameTitle: 'Full name',
   passwordTitle: 'Password',
-  successSignIn: 'You have successfully logged in',
-  errorSignIn: 'Error sign in',
-  notAccount: "Don't have an account?",
+  requestPasswordTitle: 'Request password',
+  successRegister: 'Welcome on board',
+  errorRegister: 'Error register',
+  yesAccount: 'Already have account?',
 };
 
-const SignInScreen: React.FC = () => {
+const SignUpScreen: FC = () => {
   const classes = useStyles();
   const { setAlert } = useContext(UIContext);
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showRequestPassword, setShowRequestPassword] = useState(false);
 
   const onClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
+  const onClickShowRequestPassword = () => {
+    setShowRequestPassword(!showRequestPassword);
+  };
   const onMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-  };
-
-  const signInWithEmailAndPassword = (values: IValues) => {
-    const { email, password } = values;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        // Signed in
-        setAlert({
-          show: true,
-          severity: 'success',
-          message: TITLES.successSignIn,
-        });
-      })
-      .catch((error) => {
-        const { message } = error;
-        setAlert({
-          show: true,
-          severity: 'error',
-          message: `${TITLES.errorSignIn}${(message && `: ${message}`) || ''}`,
-        });
-      });
   };
 
   return (
@@ -78,7 +60,7 @@ const SignInScreen: React.FC = () => {
                 onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
                     setSubmitting(false);
-                    signInWithEmailAndPassword(values);
+                    // signInWithEmailAndPassword(values);
                   }, 200);
                 }}
               >
@@ -98,6 +80,14 @@ const SignInScreen: React.FC = () => {
                         name={keyValues.email}
                         type={keyValues.email}
                         label={TITLES.emailTitle}
+                        variant="standard"
+                        fullWidth
+                        autoComplete="off"
+                      />
+                      <Field
+                        component={FormikAppTextField}
+                        name={keyValues.fullName}
+                        label={TITLES.fullNameTitle}
                         variant="standard"
                         fullWidth
                         autoComplete="off"
@@ -130,6 +120,34 @@ const SignInScreen: React.FC = () => {
                           ),
                         }}
                       />
+                      <Field
+                        component={FormikAppTextField}
+                        name={keyValues.requestPassword}
+                        type={showRequestPassword ? 'text' : keyValues.password}
+                        label={TITLES.requestPasswordTitle}
+                        variant="standard"
+                        fullWidth
+                        autoComplete="off"
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment
+                              position="end"
+                              style={{ backgroundColor: 'inherit' }}
+                            >
+                              <IconButton
+                                onClick={onClickShowRequestPassword}
+                                onMouseDown={onMouseDownPassword}
+                              >
+                                {showRequestPassword ? (
+                                  <Visibility />
+                                ) : (
+                                  <VisibilityOff />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />{' '}
                       <Button
                         variant="contained"
                         fullWidth
@@ -143,8 +161,8 @@ const SignInScreen: React.FC = () => {
                 }}
               </Formik>
               <Box className={classes.footer}>
-                <Typography>{TITLES.notAccount}</Typography>
-                <NavLinkButton link={register} />
+                <Typography>{TITLES.yesAccount}</Typography>
+                <NavLinkButton link={login} />
               </Box>
             </Grid>
           </Grid>
@@ -154,4 +172,4 @@ const SignInScreen: React.FC = () => {
   );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
