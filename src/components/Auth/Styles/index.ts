@@ -30,16 +30,20 @@ const useStyles = makeStyles({
   signin: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: '70%',
-    height: '50%',
+    height: '35%',
     marginTop: '30%',
   },
   signup: {
-    '&.signin': {
-      height: '70%',
-    },
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '70%',
+    height: '55%',
+    marginTop: '30%',
   },
   footer: {
     display: 'flex',

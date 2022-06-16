@@ -70,7 +70,7 @@ const SignUpScreen: FC = () => {
                     <form
                       autoComplete="off"
                       onSubmit={formik.handleSubmit}
-                      className={classes.signin}
+                      className={classes.signup}
                     >
                       <Typography variant="h5" fontWeight="bold">
                         {TITLES.title}
