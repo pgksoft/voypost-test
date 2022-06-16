@@ -19,7 +19,7 @@ import useStyles from '../Styles';
 import NavLinkButton from '../../Unknown/Infrastrucuture/Ui/Nav-Link-Button';
 import login, { register } from '../../Unknown/Root/const/links';
 
-const TITLES: Record<string, string> = {
+const TITLES = {
   title: login.title,
   emailTitle: 'Email Address',
   passwordTitle: 'Password',
@@ -80,7 +80,7 @@ const SignInScreen: React.FC = () => {
                     <form
                       autoComplete="off"
                       onSubmit={formik.handleSubmit}
-                      className={classes.signin}
+                      className={classes.signIn}
                     >
                       <Typography variant="h5" fontWeight="bold">
                         {TITLES.title}

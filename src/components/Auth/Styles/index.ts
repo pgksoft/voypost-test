@@ -18,16 +18,18 @@ const useStyles = makeStyles({
     backgroundImage: `url(${heroImage})`,
   },
   rightSide: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: '50% 10%',
-    backgroundSize: '20%',
-    backgroundImage: `url(${voypostLogo})`,
+    '&.MuiGrid-root': {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: '50% 10%',
+      backgroundSize: '20%',
+      backgroundImage: `url(${voypostLogo})`,
+    },
   },
-  signin: {
+  signIn: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -36,7 +38,7 @@ const useStyles = makeStyles({
     height: '35%',
     marginTop: '30%',
   },
-  signup: {
+  signUp: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',

@@ -19,7 +19,7 @@ import NavLinkButton from '../../Unknown/Infrastrucuture/Ui/Nav-Link-Button';
 import login, { register } from '../../Unknown/Root/const/links';
 import useStyles from '../Styles';
 
-const TITLES: Record<string, string> = {
+const TITLES = {
   title: register.title,
   emailTitle: 'Email Address',
   fullNameTitle: 'Full name',
@@ -69,7 +69,7 @@ const SignUpScreen: FC = () => {
             setAlert({
               show: true,
               severity: 'error',
-              message: `${TITLES.errorSignIn}${
+              message: `${TITLES.errorRegister}${
                 (message && `: ${message}`) || ''
               }`,
             });
@@ -80,7 +80,9 @@ const SignUpScreen: FC = () => {
         setAlert({
           show: true,
           severity: 'error',
-          message: `${TITLES.errorSignIn}${(message && `: ${message}`) || ''}`,
+          message: `${TITLES.errorRegister}${
+            (message && `: ${message}`) || ''
+          }`,
         });
       });
   };
@@ -108,7 +110,7 @@ const SignUpScreen: FC = () => {
                     <form
                       autoComplete="off"
                       onSubmit={formik.handleSubmit}
-                      className={classes.signup}
+                      className={classes.signUp}
                     >
                       <Typography variant="h5" fontWeight="bold">
                         {TITLES.title}
