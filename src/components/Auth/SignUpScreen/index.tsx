@@ -25,7 +25,7 @@ const TITLES: Record<string, string> = {
   fullNameTitle: 'Full name',
   passwordTitle: 'Password',
   requestPasswordTitle: 'Request password',
-  successRegister: 'Welcome on board',
+  successRegister: 'Welcome on board🚀',
   errorRegister: 'Error register',
   yesAccount: 'Already have account?',
 };
@@ -47,6 +47,44 @@ const SignUpScreen: FC = () => {
     event.preventDefault();
   };
 
+  const signUp = (values: IValues) => {
+    const { email, password, fullName } = values;
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        user
+          ?.updateProfile({ displayName: fullName })
+          .then(() => {
+            setAlert({
+              show: true,
+              severity: 'success',
+              message: TITLES.successRegister,
+              sx: { backgroundColor: '#000' },
+            });
+          })
+          .catch((error) => {
+            const { message } = error;
+            setAlert({
+              show: true,
+              severity: 'error',
+              message: `${TITLES.errorSignIn}${
+                (message && `: ${message}`) || ''
+              }`,
+            });
+          });
+      })
+      .catch((error) => {
+        const { message } = error;
+        setAlert({
+          show: true,
+          severity: 'error',
+          message: `${TITLES.errorSignIn}${(message && `: ${message}`) || ''}`,
+        });
+      });
+  };
+
   return (
     <>
       <Box className={classes.root}>
@@ -60,7 +98,7 @@ const SignUpScreen: FC = () => {
                 onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
                     setSubmitting(false);
-                    // signInWithEmailAndPassword(values);
+                    signUp(values);
                   }, 200);
                 }}
               >

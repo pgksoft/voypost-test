@@ -41,6 +41,11 @@ const Root: React.FC = () => {
             path={login.url}
             component={() => <Redirect to={home.url} />}
           />
+          <Route
+            exact
+            path={register.url}
+            component={() => <Redirect to={home.url} />}
+          />
           <Route path="*" component={NotFoundScreen} />
         </Switch>
       </AuthenticatedLayout>

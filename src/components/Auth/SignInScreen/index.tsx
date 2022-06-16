@@ -47,14 +47,6 @@ const SignInScreen: React.FC = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        // Signed in
-        setAlert({
-          show: true,
-          severity: 'success',
-          message: TITLES.successSignIn,
-        });
-      })
       .catch((error) => {
         const { message } = error;
         setAlert({
