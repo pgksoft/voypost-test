@@ -1,15 +1,15 @@
-import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { Box, Typography } from '@mui/material';
 
 const HomeScreen: React.FC = () => {
   return (
     <Box
-      height="100vh"
+      height="80vh"
       display="flex"
       justifyContent="center"
       alignItems="center"
     >
-      <Typography variant="h1">Home page</Typography>
+      <Typography variant="h1">&nbsp;</Typography>
     </Box>
   );
 };

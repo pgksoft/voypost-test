@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
 import React from 'react';
+import MainMenu from '../Main-menu';
 
 interface AuthenticatedLayoutProps {
   children: React.ReactElement;
@@ -8,7 +8,7 @@ interface AuthenticatedLayoutProps {
 const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
   children,
 }: AuthenticatedLayoutProps) => {
-  return <Box>{children}</Box>;
+  return <MainMenu>{children}</MainMenu>;
 };
 
 export default AuthenticatedLayout;

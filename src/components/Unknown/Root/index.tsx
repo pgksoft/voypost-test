@@ -6,6 +6,7 @@ import GuestLayout from '../GuestLayout';
 import HomeScreen from '../HomeScreen';
 import NotFoundScreen from '../NotFoundScreen';
 import SignInScreen from '../../Auth/SignInScreen';
+import login, { home } from './const/links';
 
 const Root: React.FC = () => {
   const {
@@ -15,6 +16,7 @@ const Root: React.FC = () => {
   } = useUser();
   const [isUserLoaded, setIsUserLoaded] = useState(false);
   const isLogged = !!user;
+
   useEffect(() => {
     firstValuePromise.then(() => setIsUserLoaded(true));
   }, [firstValuePromise, setIsUserLoaded]);
@@ -32,8 +34,12 @@ const Root: React.FC = () => {
     return (
       <AuthenticatedLayout>
         <Switch>
-          <Route exact path="/" component={HomeScreen} />
-          <Route exact path="/login" component={() => <Redirect to="/" />} />
+          <Route exact path={home.url} component={HomeScreen} />
+          <Route
+            exact
+            path={login.url}
+            component={() => <Redirect to={home.url} />}
+          />
           <Route path="*" component={NotFoundScreen} />
         </Switch>
       </AuthenticatedLayout>
@@ -43,8 +49,8 @@ const Root: React.FC = () => {
   return (
     <GuestLayout>
       <Switch>
-        <Route exact path="/login" component={SignInScreen} />
-        <Route path="*" component={NotFoundScreen} />
+        <Route exact path={login.url} component={SignInScreen} />
+        <Route path="*" component={() => <Redirect to={login.url} />} />
       </Switch>
     </GuestLayout>
   );
