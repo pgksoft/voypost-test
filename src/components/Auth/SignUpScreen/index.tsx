@@ -69,9 +69,7 @@ const SignUpScreen: FC = () => {
             setAlert({
               show: true,
               severity: 'error',
-              message: `${TITLES.errorRegister}${
-                (message && `: ${message}`) || ''
-              }`,
+              message: message || TITLES.errorRegister,
             });
           });
       })
@@ -80,9 +78,7 @@ const SignUpScreen: FC = () => {
         setAlert({
           show: true,
           severity: 'error',
-          message: `${TITLES.errorRegister}${
-            (message && `: ${message}`) || ''
-          }`,
+          message: message || TITLES.errorRegister,
         });
       });
   };

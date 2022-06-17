@@ -52,7 +52,7 @@ const SignInScreen: React.FC = () => {
         setAlert({
           show: true,
           severity: 'error',
-          message: `${TITLES.errorSignIn}${(message && `: ${message}`) || ''}`,
+          message: message || TITLES.errorSignIn,
         });
       });
   };
