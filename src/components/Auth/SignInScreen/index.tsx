@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import firebase from 'firebase';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Grid,
@@ -20,7 +21,6 @@ import {
 import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-components/Formik-app-text-field';
 import validationSchema from './util/validation-schema';
 import useStyles from '../Styles';
-import NavLinkButton from '../../Unknown/Infrastrucuture/Ui/Nav-Link-Button';
 import login, { register } from '../../Unknown/Root/const/links';
 
 const TITLES = {
@@ -140,7 +140,9 @@ const SignInScreen: React.FC = () => {
               </Formik>
               <Box className={classes.footer}>
                 <Typography>{TITLES.notAccount}</Typography>
-                <NavLinkButton link={register} />
+                <Button variant="text" component={Link} to={register.url}>
+                  {register.title}
+                </Button>
               </Box>
             </Grid>
           </Grid>
