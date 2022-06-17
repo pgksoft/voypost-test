@@ -1,16 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import {
-  Container,
-  Grid,
-  Typography,
-  Button,
-  Box,
-  InputAdornment,
-  IconButton,
-} from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Container, Grid, Typography, Button, Box } from '@mui/material';
 import { Field, Formik, FormikProps } from 'formik';
 import { UIContext } from '../../Unknown/UIContext';
 import {
@@ -22,6 +13,7 @@ import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-
 import validationSchema from './util/validation-schema';
 import useStyles from '../Styles';
 import login, { register } from '../../Unknown/Root/const/links';
+import PasswordField from '../../Unknown/Infrastrucuture/PasswordField';
 
 const TITLES = {
   title: login.title,
@@ -35,16 +27,6 @@ const TITLES = {
 const SignInScreen: React.FC = () => {
   const classes = useStyles();
   const { setAlert } = useContext(UIContext);
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const onClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const onMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
 
   const signInWithEmailAndPassword = (values: ISingInFormValues) => {
     const { email, password } = values;
@@ -97,34 +79,12 @@ const SignInScreen: React.FC = () => {
                         autoComplete="off"
                       />
                       <Field
-                        component={FormikAppTextField}
+                        component={PasswordField}
                         name={keySingInFormValues.password}
-                        type={
-                          showPassword ? 'text' : keySingInFormValues.password
-                        }
                         label={TITLES.passwordTitle}
                         variant="standard"
                         fullWidth
                         autoComplete="off"
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment
-                              position="end"
-                              style={{ backgroundColor: 'inherit' }}
-                            >
-                              <IconButton
-                                onClick={onClickShowPassword}
-                                onMouseDown={onMouseDownPassword}
-                              >
-                                {showPassword ? (
-                                  <Visibility />
-                                ) : (
-                                  <VisibilityOff />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
                       />
                       <Button
                         variant="contained"

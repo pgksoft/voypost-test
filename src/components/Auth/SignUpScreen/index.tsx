@@ -1,16 +1,7 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext } from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  IconButton,
-  InputAdornment,
-  Typography,
-} from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { Field, Formik, FormikProps } from 'formik';
 import { UIContext } from '../../Unknown/UIContext';
 import {
@@ -22,6 +13,7 @@ import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-
 import validationSchema from './util/validation-schema';
 import login, { register } from '../../Unknown/Root/const/links';
 import useStyles from '../Styles';
+import PasswordField from '../../Unknown/Infrastrucuture/PasswordField';
 
 const TITLES = {
   title: register.title,
@@ -37,19 +29,6 @@ const TITLES = {
 const SignUpScreen: FC = () => {
   const classes = useStyles();
   const { setAlert } = useContext(UIContext);
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showRequestPassword, setShowRequestPassword] = useState(false);
-
-  const onClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const onClickShowRequestPassword = () => {
-    setShowRequestPassword(!showRequestPassword);
-  };
-  const onMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
 
   const signUp = (values: ISingUpFormValues) => {
     const { email, password, fullName } = values;
@@ -130,67 +109,21 @@ const SignUpScreen: FC = () => {
                         autoComplete="off"
                       />
                       <Field
-                        component={FormikAppTextField}
+                        component={PasswordField}
                         name={keySingUpFormValues.password}
-                        type={
-                          showPassword ? 'text' : keySingUpFormValues.password
-                        }
                         label={TITLES.passwordTitle}
                         variant="standard"
                         fullWidth
                         autoComplete="off"
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment
-                              position="end"
-                              style={{ backgroundColor: 'inherit' }}
-                            >
-                              <IconButton
-                                onClick={onClickShowPassword}
-                                onMouseDown={onMouseDownPassword}
-                              >
-                                {showPassword ? (
-                                  <Visibility />
-                                ) : (
-                                  <VisibilityOff />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
                       />
                       <Field
-                        component={FormikAppTextField}
+                        component={PasswordField}
                         name={keySingUpFormValues.requestPassword}
-                        type={
-                          showRequestPassword
-                            ? 'text'
-                            : keySingUpFormValues.password
-                        }
                         label={TITLES.requestPasswordTitle}
                         variant="standard"
                         fullWidth
                         autoComplete="off"
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment
-                              position="end"
-                              style={{ backgroundColor: 'inherit' }}
-                            >
-                              <IconButton
-                                onClick={onClickShowRequestPassword}
-                                onMouseDown={onMouseDownPassword}
-                              >
-                                {showRequestPassword ? (
-                                  <Visibility />
-                                ) : (
-                                  <VisibilityOff />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />{' '}
+                      />
                       <Button
                         variant="contained"
                         fullWidth

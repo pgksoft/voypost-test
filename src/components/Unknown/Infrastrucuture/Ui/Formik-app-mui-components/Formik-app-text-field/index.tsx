@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { FieldProps, getIn } from 'formik';
 import { TextFieldProps, TextField } from '@mui/material';
 
-type TFormikAppTextFieldProps = FieldProps & TextFieldProps;
+export type TFormikAppTextFieldProps = FieldProps & TextFieldProps;
 
 const FormikAppTextField: FC<TFormikAppTextFieldProps> = (
   props: TFormikAppTextFieldProps,
