@@ -30,39 +30,30 @@ const SignUpScreen: FC = () => {
   const classes = useStyles();
   const { setAlert } = useContext(UIContext);
 
-  const signUp = (values: ISingUpFormValues) => {
+  const signUp = async (values: ISingUpFormValues) => {
     const { email, password, fullName } = values;
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        user
-          ?.updateProfile({ displayName: fullName })
-          .then(() => {
-            setAlert({
-              show: true,
-              message: TITLES.successRegister,
-              sx: { backgroundColor: '#000' },
-            });
-          })
-          .catch((error) => {
-            const { message } = error;
-            setAlert({
-              show: true,
-              severity: 'error',
-              message: message || TITLES.errorRegister,
-            });
-          });
-      })
-      .catch((error) => {
-        const { message } = error;
-        setAlert({
-          show: true,
-          severity: 'error',
-          message: message || TITLES.errorRegister,
-        });
+    try {
+      const credential = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      if (credential.user) {
+        await credential.user.updateProfile({ displayName: fullName });
+      } else {
+        throw new Error(TITLES.errorRegister);
+      }
+      setAlert({
+        show: true,
+        message: TITLES.successRegister,
+        sx: { backgroundColor: '#000' },
       });
+    } catch (error) {
+      const message = error instanceof Error && error.message;
+      setAlert({
+        show: true,
+        severity: 'error',
+        message: message || TITLES.errorRegister,
+      });
+    }
   };
 
   return (

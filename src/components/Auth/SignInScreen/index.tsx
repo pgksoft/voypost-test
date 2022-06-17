@@ -28,19 +28,18 @@ const SignInScreen: React.FC = () => {
   const classes = useStyles();
   const { setAlert } = useContext(UIContext);
 
-  const signInWithEmailAndPassword = (values: ISingInFormValues) => {
+  const signInWithEmailAndPassword = async (values: ISingInFormValues) => {
     const { email, password } = values;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((error) => {
-        const { message } = error;
-        setAlert({
-          show: true,
-          severity: 'error',
-          message: message || TITLES.errorSignIn,
-        });
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      const message = error instanceof Error && error.message;
+      setAlert({
+        show: true,
+        severity: 'error',
+        message: message || TITLES.errorSignIn,
       });
+    }
   };
 
   return (
