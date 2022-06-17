@@ -1,18 +1,18 @@
-export interface ISingsInFormValues {
+export interface ISingInFormValues {
   email: string;
   password: string;
 }
 
-export type TKeySingsInFormValues = keyof ISingsInFormValues;
+export type TKeySingInFormValues = keyof ISingInFormValues;
 
-export const keySingsInFormValues: Record<
-  TKeySingsInFormValues,
-  TKeySingsInFormValues
+export const keySingInFormValues: Record<
+  TKeySingInFormValues,
+  TKeySingInFormValues
 > = {
   email: 'email',
   password: 'password',
 };
 
-export const getInitialSingsInFormValues = (): ISingsInFormValues => {
+export const getInitialSingInFormValues = (): ISingInFormValues => {
   return { email: '', password: '' };
 };

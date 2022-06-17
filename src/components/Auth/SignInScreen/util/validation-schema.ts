@@ -3,11 +3,11 @@ import {
   emailValidationSchema,
   passwordValidationSchema,
 } from '../../Field-validation-schemes';
-import { keySingsInFormValues } from './values';
+import { keySingInFormValues } from './values';
 
 const validationSchema = object({
-  [keySingsInFormValues.email]: emailValidationSchema,
-  [keySingsInFormValues.password]: passwordValidationSchema,
+  [keySingInFormValues.email]: emailValidationSchema,
+  [keySingInFormValues.password]: passwordValidationSchema,
 });
 
 export default validationSchema;
