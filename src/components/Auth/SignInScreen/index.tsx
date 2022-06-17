@@ -68,10 +68,8 @@ const SignInScreen: React.FC = () => {
                 initialValues={getInitialValues()}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    setSubmitting(false);
-                    signInWithEmailAndPassword(values);
-                  }, 200);
+                  signInWithEmailAndPassword(values);
+                  setSubmitting(false);
                 }}
               >
                 {(formik: FormikProps<IValues>) => {

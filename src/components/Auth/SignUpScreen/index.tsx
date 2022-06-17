@@ -59,7 +59,6 @@ const SignUpScreen: FC = () => {
           .then(() => {
             setAlert({
               show: true,
-              severity: 'success',
               message: TITLES.successRegister,
               sx: { backgroundColor: '#000' },
             });
@@ -94,10 +93,8 @@ const SignUpScreen: FC = () => {
                 initialValues={getInitialValues()}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    setSubmitting(false);
-                    signUp(values);
-                  }, 200);
+                  signUp(values);
+                  setSubmitting(false);
                 }}
               >
                 {(formik: FormikProps<IValues>) => {
