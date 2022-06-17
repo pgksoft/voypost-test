@@ -12,7 +12,11 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Field, Formik, FormikProps } from 'formik';
 import { UIContext } from '../../Unknown/UIContext';
-import { getInitialValues, IValues, keyValues } from './util/values';
+import {
+  getInitialSingsInFormValues,
+  ISingsInFormValues,
+  keySingsInFormValues,
+} from './util/values';
 import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-components/Formik-app-text-field';
 import validationSchema from './util/validation-schema';
 import useStyles from '../Styles';
@@ -42,7 +46,7 @@ const SignInScreen: React.FC = () => {
     event.preventDefault();
   };
 
-  const signInWithEmailAndPassword = (values: IValues) => {
+  const signInWithEmailAndPassword = (values: ISingsInFormValues) => {
     const { email, password } = values;
     firebase
       .auth()
@@ -65,14 +69,14 @@ const SignInScreen: React.FC = () => {
             <Grid item xs={6} className={classes.leftSide} />
             <Grid item xs={6} className={classes.rightSide}>
               <Formik
-                initialValues={getInitialValues()}
+                initialValues={getInitialSingsInFormValues()}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   signInWithEmailAndPassword(values);
                   setSubmitting(false);
                 }}
               >
-                {(formik: FormikProps<IValues>) => {
+                {(formik: FormikProps<ISingsInFormValues>) => {
                   const { isSubmitting } = formik;
                   return (
                     <form
@@ -85,8 +89,8 @@ const SignInScreen: React.FC = () => {
                       </Typography>
                       <Field
                         component={FormikAppTextField}
-                        name={keyValues.email}
-                        type={keyValues.email}
+                        name={keySingsInFormValues.email}
+                        type={keySingsInFormValues.email}
                         label={TITLES.emailTitle}
                         variant="standard"
                         fullWidth
@@ -94,8 +98,10 @@ const SignInScreen: React.FC = () => {
                       />
                       <Field
                         component={FormikAppTextField}
-                        name={keyValues.password}
-                        type={showPassword ? 'text' : keyValues.password}
+                        name={keySingsInFormValues.password}
+                        type={
+                          showPassword ? 'text' : keySingsInFormValues.password
+                        }
                         label={TITLES.passwordTitle}
                         variant="standard"
                         fullWidth

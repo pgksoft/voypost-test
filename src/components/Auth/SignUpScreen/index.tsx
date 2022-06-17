@@ -12,7 +12,11 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Field, Formik, FormikProps } from 'formik';
 import { UIContext } from '../../Unknown/UIContext';
-import { getInitialValues, IValues, keyValues } from './util/values';
+import {
+  getInitialSingsUpFormValues,
+  ISingsUpFormValues,
+  keySingsUpFormValues,
+} from './util/values';
 import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-components/Formik-app-text-field';
 import validationSchema from './util/validation-schema';
 import NavLinkButton from '../../Unknown/Infrastrucuture/Ui/Nav-Link-Button';
@@ -47,7 +51,7 @@ const SignUpScreen: FC = () => {
     event.preventDefault();
   };
 
-  const signUp = (values: IValues) => {
+  const signUp = (values: ISingsUpFormValues) => {
     const { email, password, fullName } = values;
     firebase
       .auth()
@@ -90,14 +94,14 @@ const SignUpScreen: FC = () => {
             <Grid item xs={6} className={classes.leftSide} />
             <Grid item xs={6} className={classes.rightSide}>
               <Formik
-                initialValues={getInitialValues()}
+                initialValues={getInitialSingsUpFormValues()}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting }) => {
                   signUp(values);
                   setSubmitting(false);
                 }}
               >
-                {(formik: FormikProps<IValues>) => {
+                {(formik: FormikProps<ISingsUpFormValues>) => {
                   const { isSubmitting } = formik;
                   return (
                     <form
@@ -110,8 +114,8 @@ const SignUpScreen: FC = () => {
                       </Typography>
                       <Field
                         component={FormikAppTextField}
-                        name={keyValues.email}
-                        type={keyValues.email}
+                        name={keySingsUpFormValues.email}
+                        type={keySingsUpFormValues.email}
                         label={TITLES.emailTitle}
                         variant="standard"
                         fullWidth
@@ -119,7 +123,7 @@ const SignUpScreen: FC = () => {
                       />
                       <Field
                         component={FormikAppTextField}
-                        name={keyValues.fullName}
+                        name={keySingsUpFormValues.fullName}
                         label={TITLES.fullNameTitle}
                         variant="standard"
                         fullWidth
@@ -127,8 +131,10 @@ const SignUpScreen: FC = () => {
                       />
                       <Field
                         component={FormikAppTextField}
-                        name={keyValues.password}
-                        type={showPassword ? 'text' : keyValues.password}
+                        name={keySingsUpFormValues.password}
+                        type={
+                          showPassword ? 'text' : keySingsUpFormValues.password
+                        }
                         label={TITLES.passwordTitle}
                         variant="standard"
                         fullWidth
@@ -155,8 +161,12 @@ const SignUpScreen: FC = () => {
                       />
                       <Field
                         component={FormikAppTextField}
-                        name={keyValues.requestPassword}
-                        type={showRequestPassword ? 'text' : keyValues.password}
+                        name={keySingsUpFormValues.requestPassword}
+                        type={
+                          showRequestPassword
+                            ? 'text'
+                            : keySingsUpFormValues.password
+                        }
                         label={TITLES.requestPasswordTitle}
                         variant="standard"
                         fullWidth

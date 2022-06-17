@@ -1,5 +1,5 @@
 import { string, ref } from 'yup';
-import { keyValues } from '../SignInScreen/util/values';
+import { keySingsInFormValues } from '../SignInScreen/util/values';
 
 const MIN_PASSWORD_LENGTH = 12;
 
@@ -24,6 +24,6 @@ export const fullNameValidationSchema = string()
   .trim('spaces');
 
 export const passwordValidationSchema = string()
-  .oneOf([ref(keyValues.password), null], "Passwords don't match!")
+  .oneOf([ref(keySingsInFormValues.password), null], "Passwords don't match!")
   .min(MIN_PASSWORD_LENGTH, TITLES.stringValidateMin)
   .required(TITLES.stringValidateEmpty);

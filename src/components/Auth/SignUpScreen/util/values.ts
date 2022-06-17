@@ -1,19 +1,22 @@
-export interface IValues {
+export interface ISingsUpFormValues {
   email: string;
   fullName: string;
   password: string;
   requestPassword: string;
 }
 
-export type TKeyValues = keyof IValues;
+export type TKeySingsUpFormValues = keyof ISingsUpFormValues;
 
-export const keyValues: Record<TKeyValues, TKeyValues> = {
+export const keySingsUpFormValues: Record<
+  TKeySingsUpFormValues,
+  TKeySingsUpFormValues
+> = {
   email: 'email',
   fullName: 'fullName',
   password: 'password',
   requestPassword: 'requestPassword',
 };
 
-export const getInitialValues = (): IValues => {
+export const getInitialSingsUpFormValues = (): ISingsUpFormValues => {
   return { email: '', fullName: '', password: '', requestPassword: '' };
 };

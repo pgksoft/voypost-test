@@ -1,15 +1,18 @@
-export interface IValues {
+export interface ISingsInFormValues {
   email: string;
   password: string;
 }
 
-export type TKeyValues = keyof IValues;
+export type TKeySingsInFormValues = keyof ISingsInFormValues;
 
-export const keyValues: Record<TKeyValues, TKeyValues> = {
+export const keySingsInFormValues: Record<
+  TKeySingsInFormValues,
+  TKeySingsInFormValues
+> = {
   email: 'email',
   password: 'password',
 };
 
-export const getInitialValues = (): IValues => {
+export const getInitialSingsInFormValues = (): ISingsInFormValues => {
   return { email: '', password: '' };
 };

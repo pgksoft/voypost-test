@@ -4,13 +4,13 @@ import {
   fullNameValidationSchema,
   passwordValidationSchema,
 } from '../../Field-validation-schemes';
-import { keyValues } from './values';
+import { keySingsUpFormValues } from './values';
 
 const validationSchema = object({
-  [keyValues.email]: emailValidationSchema,
-  [keyValues.fullName]: fullNameValidationSchema,
-  [keyValues.password]: passwordValidationSchema,
-  [keyValues.requestPassword]: passwordValidationSchema,
+  [keySingsUpFormValues.email]: emailValidationSchema,
+  [keySingsUpFormValues.fullName]: fullNameValidationSchema,
+  [keySingsUpFormValues.password]: passwordValidationSchema,
+  [keySingsUpFormValues.requestPassword]: passwordValidationSchema,
 });
 
 export default validationSchema;
