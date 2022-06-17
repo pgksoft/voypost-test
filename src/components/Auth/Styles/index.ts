@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     width: '70%',
     height: '35%',
-    marginTop: '30%',
+    marginTop: '125px',
   },
   signUp: {
     display: 'flex',
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     width: '70%',
     height: '55%',
-    marginTop: '30%',
+    marginTop: '125px',
   },
   footer: {
     display: 'flex',
