@@ -6,8 +6,9 @@ import GuestLayout from '../GuestLayout';
 import HomeScreen from '../HomeScreen';
 import NotFoundScreen from '../NotFoundScreen';
 import SignInScreen from '../../Auth/SignInScreen';
-import login, { home, register } from './const/links';
+import login, { listingFlats, home, register } from './const/links';
 import SignUpScreen from '../../Auth/SignUpScreen';
+import FlatsScreen from '../../FlatsScreen';
 
 const Root: React.FC = () => {
   const {
@@ -36,6 +37,7 @@ const Root: React.FC = () => {
       <AuthenticatedLayout>
         <Switch>
           <Route exact path={home.url} component={HomeScreen} />
+          <Route exact path={listingFlats.url} component={FlatsScreen} />
           <Route
             exact
             path={login.url}

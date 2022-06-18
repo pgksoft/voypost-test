@@ -1,15 +1,14 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Box, Button } from '@mui/material';
+import { listingFlats } from '../Root/const/links';
 
 const HomeScreen: React.FC = () => {
   return (
-    <Box
-      height="80vh"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Typography variant="h1">&nbsp;</Typography>
+    <Box display="flex" justifyContent="center" padding={4}>
+      <Button variant="contained" component={Link} to={listingFlats.url}>
+        {listingFlats.title}
+      </Button>
     </Box>
   );
 };

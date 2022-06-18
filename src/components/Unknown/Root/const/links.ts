@@ -15,4 +15,9 @@ export const home: TLink = {
   title: 'Voypost',
 };
 
+export const listingFlats: TLink = {
+  url: '/flats',
+  title: 'Explore flats',
+};
+
 export default login;
