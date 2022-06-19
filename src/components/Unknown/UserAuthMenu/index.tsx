@@ -2,8 +2,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { useUser } from 'reactfire';
 import { IconButton, Menu, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import Logout from './Log-out';
-import getUserLetters from './Log-out/util/get-user-letters';
+import Logout from './LogOut';
+import getUserLetters from './LogOut/util/getUserLetters';
 
 export const useStyleIconButton = makeStyles({
   iconButton: {

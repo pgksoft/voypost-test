@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import UserAuthMenu from '../User-auth-menu';
+import UserAuthMenu from '../UserAuthMenu';
 import { home } from '../Root/const/links';
 
 export const useStyles = makeStyles({

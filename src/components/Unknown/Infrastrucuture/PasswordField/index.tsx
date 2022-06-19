@@ -3,7 +3,7 @@ import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import FormikAppTextField, {
   TFormikAppTextFieldProps,
-} from '../Ui/Formik-app-mui-components/Formik-app-text-field';
+} from '../Ui/FormikAppMuiComponents/FormikAppTextField';
 
 const PasswordField: FC<TFormikAppTextFieldProps> = (
   props: TFormikAppTextFieldProps,

@@ -9,8 +9,8 @@ import {
   ISingInFormValues,
   keySingInFormValues,
 } from './util/values';
-import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/Formik-app-mui-components/Formik-app-text-field';
-import validationSchema from './util/validation-schema';
+import FormikAppTextField from '../../Unknown/Infrastrucuture/Ui/FormikAppMuiComponents/FormikAppTextField';
+import validationSchema from './util/validationSchema';
 import useStyles from '../Styles';
 import login, { register } from '../../Unknown/Root/const/links';
 import PasswordField from '../../Unknown/Infrastrucuture/PasswordField';

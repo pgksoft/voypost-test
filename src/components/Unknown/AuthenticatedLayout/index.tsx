@@ -1,5 +1,5 @@
 import React from 'react';
-import MainMenu from '../Main-menu';
+import MainMenu from '../MainMenu';
 
 interface AuthenticatedLayoutProps {
   children: React.ReactElement;

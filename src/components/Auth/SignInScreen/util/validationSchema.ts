@@ -2,7 +2,7 @@ import { object } from 'yup';
 import {
   emailValidationSchema,
   passwordValidationSchema,
-} from '../../Field-validation-schemes';
+} from '../../FieldValidationSchemes';
 import { keySingInFormValues } from './values';
 
 const validationSchema = object({

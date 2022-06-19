@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
-import heroImage from '../Images/hero-image.png';
-import voypostLogo from '../Images/voypost-logo.svg';
+import heroImage from '../Images/heroImage.png';
+import voypostLogo from '../Images/voypostLogo.svg';
 
 const useStyles = makeStyles({
   root: {

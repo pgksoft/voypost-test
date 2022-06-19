@@ -3,7 +3,7 @@ import {
   emailValidationSchema,
   fullNameValidationSchema,
   passwordValidationSchema,
-} from '../../Field-validation-schemes';
+} from '../../FieldValidationSchemes';
 import { keySingUpFormValues } from './values';
 
 const validationSchema = object({
