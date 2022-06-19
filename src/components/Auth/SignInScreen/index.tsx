@@ -65,9 +65,7 @@ const SignInScreen: React.FC = () => {
                       onSubmit={formik.handleSubmit}
                       className={classes.signIn}
                     >
-                      <Typography variant="h5" fontWeight="bold">
-                        {TITLES.title}
-                      </Typography>
+                      <Typography variant="h5Bold">{TITLES.title}</Typography>
                       <Field
                         component={FormikAppTextField}
                         name={keySingInFormValues.email}

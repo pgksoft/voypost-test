@@ -79,9 +79,7 @@ const SignUpScreen: FC = () => {
                       onSubmit={formik.handleSubmit}
                       className={classes.signUp}
                     >
-                      <Typography variant="h5" fontWeight="bold">
-                        {TITLES.title}
-                      </Typography>
+                      <Typography variant="h5Bold">{TITLES.title}</Typography>
                       <Field
                         component={FormikAppTextField}
                         name={keySingUpFormValues.email}
