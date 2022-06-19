@@ -1,6 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { Alert, AlertColor, Snackbar, Theme } from '@mui/material';
-import { SxProps } from '@mui/system';
+import { Alert, AlertColor, Snackbar } from '@mui/material';
 
 export const UIContext = createContext<UIContextProps>({} as UIContextProps);
 
@@ -12,7 +11,6 @@ interface AlertProps {
   show: boolean;
   severity?: AlertColor;
   message?: string;
-  sx?: SxProps<Theme>;
 }
 
 export const UIContextProvider: React.FC = ({ children }) => {
@@ -35,12 +33,7 @@ export const UIContextProvider: React.FC = ({ children }) => {
         onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert
-          elevation={6}
-          variant="filled"
-          severity={alert.severity}
-          sx={alert.sx}
-        >
+        <Alert elevation={6} variant="filled" severity={alert.severity}>
           {alert.message}
         </Alert>
       </Snackbar>

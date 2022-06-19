@@ -43,8 +43,8 @@ const SignUpScreen: FC = () => {
       }
       setAlert({
         show: true,
+        severity: 'info',
         message: TITLES.successRegister,
-        sx: { backgroundColor: '#000' },
       });
     } catch (error) {
       const message = error instanceof Error && error.message;
