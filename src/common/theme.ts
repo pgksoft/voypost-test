@@ -1,4 +1,4 @@
-import { createTheme, Theme } from '@mui/material';
+import { createTheme } from '@mui/material';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 
 declare module '@mui/material/Typography' {
